@@ -92,3 +92,16 @@ AWS Vault is an open-source tool that helps users securely store and manage thei
 **Authenticate and access AWS resources:**
 - To use a profile, run `aws-vault exec <profile-name> -- <aws-cli-command>`. 
   - This will automatically retrieve temporary credentials from AWS and inject them into your environment variables, allowing you to execute the specified AWS CLI command with the appropriate permissions. 
+
+#### Example Command
+```
+# Add a profile named "dev" 
+
+aws-vault add dev 
+
+
+
+# Execute an AWS command using the "dev" profile
+
+aws-vault exec dev -- aws s3 ls
+```
