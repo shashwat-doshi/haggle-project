@@ -82,13 +82,13 @@ AWS Vault is an open-source tool that helps users securely store and manage thei
 
 Key steps:
 - Install AWS Vault: Download and install the AWS Vault CLI tool on your system. 
-Create profiles:
 
+**Create profiles:**
 - Use the aws-vault add `<profile-name>` command to create a new profile, where `<profile-name>` is a unique identifier for your AWS account access. 
 
 - When prompted, enter your AWS Access Key ID and Secret Access Key. 
 - Optionally, set a passphrase for added security. 
 
-- Authenticate and access AWS resources:
+**Authenticate and access AWS resources:**
 - To use a profile, run `aws-vault exec <profile-name> -- <aws-cli-command>`. 
   - This will automatically retrieve temporary credentials from AWS and inject them into your environment variables, allowing you to execute the specified AWS CLI command with the appropriate permissions. 
