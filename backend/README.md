@@ -74,12 +74,21 @@ Check out a few resources that may come in handy when working with NestJS:
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## Set up AWS credentials
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Option 1: Use `aws-vault`
 
-## License
+AWS Vault is an open-source tool that helps users securely store and manage their Amazon Web Services (AWS) credentials. It can help reduce the risk of unauthorized access to AWS accounts. 
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Key steps:
+- Install AWS Vault: Download and install the AWS Vault CLI tool on your system. 
+Create profiles:
+
+- Use the aws-vault add `<profile-name>` command to create a new profile, where `<profile-name>` is a unique identifier for your AWS account access. 
+
+- When prompted, enter your AWS Access Key ID and Secret Access Key. 
+- Optionally, set a passphrase for added security. 
+
+- Authenticate and access AWS resources:
+- To use a profile, run `aws-vault exec <profile-name> -- <aws-cli-command>`. 
+  - This will automatically retrieve temporary credentials from AWS and inject them into your environment variables, allowing you to execute the specified AWS CLI command with the appropriate permissions. 
