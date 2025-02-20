@@ -80,7 +80,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 AWS Vault is an open-source tool that helps users securely store and manage their Amazon Web Services (AWS) credentials. It can help reduce the risk of unauthorized access to AWS accounts. 
 
-Key steps:
+#### Key steps:
 - Install AWS Vault: Download and install the AWS Vault CLI tool on your system. 
 
 **Create profiles:**
