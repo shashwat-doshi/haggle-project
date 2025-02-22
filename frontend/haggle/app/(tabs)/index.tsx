@@ -2,7 +2,9 @@ import { Box } from "@/components/gluestack/box";
 import { Card } from "@/components/gluestack/card";
 import { Heading } from "@/components/gluestack/heading";
 import { HStack } from "@/components/gluestack/hstack";
+import { Pressable } from "@/components/gluestack/pressable";
 import { Text } from "@/components/gluestack/text";
+import { useRouter } from "expo-router";
 
 export const services = [
   "Plumbing",
@@ -15,6 +17,8 @@ export const services = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <Box style={{ flex: 1, padding: 4 }}>
       <HStack
@@ -26,23 +30,25 @@ export default function Home() {
         }}
       >
         {services.map((service, index) => (
-          <Card
-            style={{
-              backgroundColor: "orange",
-              justifyContent: "space-between",
-              margin: 5,
-            }}
+          <Pressable
             key={index}
-            size="md"
-            variant="elevated"
-            // bg="$yellow500"
-            className=""
-            // borderRadius="$md"
-            width="45%"
-            mb="$4"
+            onPress={() => router.push(`/service/${service.toLowerCase()}`)}
           >
-            <Heading size="md">{service}</Heading>
-          </Card>
+            <Card
+              style={{
+                backgroundColor: "orange",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: 5,
+                padding: 10,
+              }}
+              size="md"
+              variant="elevated"
+              mb="$4"
+            >
+              <Heading size="md">{service}</Heading>
+            </Card>
+          </Pressable>
         ))}
       </HStack>
     </Box>
