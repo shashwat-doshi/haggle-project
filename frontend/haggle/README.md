@@ -10,13 +10,21 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Set up the development environment
+2. Get a build ready (for development)
+
+Refer to [these expo docs](https://docs.expo.dev/build/setup/)
+
+- Run `eas login`
+- Run `eas build:configure`
+- Run `eas build --platform ios --profile development`
+
+3. Set up the development environment
 
 You'll need Expo to run the native app on your local simulator:
 
 https://docs.expo.dev/get-started/set-up-your-environment/?platform=ios&device=simulated&mode=development-build
 
-2. Start the app
+4. Start the app
 
    ```bash
     npx expo start
