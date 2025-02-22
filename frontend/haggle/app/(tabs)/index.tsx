@@ -4,6 +4,7 @@ import { Heading } from "@/components/gluestack/heading";
 import { HStack } from "@/components/gluestack/hstack";
 import { Pressable } from "@/components/gluestack/pressable";
 import { Text } from "@/components/gluestack/text";
+import { ServicesList } from "@/components/ServicesList";
 import { useRouter } from "expo-router";
 
 export const services = [

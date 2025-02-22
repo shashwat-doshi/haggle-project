@@ -5,9 +5,11 @@ import { HStack } from "./gluestack/hstack";
 import { VStack } from "./gluestack/vstack";
 import { Text } from "./gluestack/text";
 import { useEffect, useState } from "react";
+import { Link, LinkText } from "./gluestack/link";
 
-export const ServicesList = (serviceType: string) => {
-  const [data, setData] = useState([]);
+export const ServicesList = ({ serviceType }: any) => {
+  console.log("serviceType", serviceType);
+  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,7 +36,8 @@ export const ServicesList = (serviceType: string) => {
         );
         if (response && response.ok) {
           const data = await response.json();
-          setData(data); // Set the fetched data to state
+          console.log("data", data);
+          setData(data.data.places); // Set the fetched data to state
         }
       } catch (err) {
         setError("Error fetching data"); // Handle any errors
@@ -55,41 +58,46 @@ export const ServicesList = (serviceType: string) => {
     return <Text>{error}</Text>;
   }
 
-  <Box>
-    <Heading size="xl">Inbox</Heading>
-    <FlatList
-      data={data}
-      renderItem={({ item }) => (
-        <Box>
-          <HStack space="md" style={{ justifyContent: "space-between" }}>
-            {/* <Avatar size="md">
+  console.log("data is:", data);
+  return (
+    <Box>
+      <Heading size="xl">Inbox</Heading>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <Box>
+            <HStack space="md" style={{ justifyContent: "space-between" }}>
+              {/* <Avatar size="md">
               <AvatarImage source={{ uri: item.avatarUrl }} />
             </Avatar> */}
-            <VStack>
+              <VStack>
+                <Text
+                  size="md"
+                  bold
+                  // color="$coolGray800"
+                  // fontWeight="$bold"
+                  // $dark-color="$warmGray100"
+                >
+                  {item.displayName.text}
+                </Text>
+                <Link href="item.websiteUri">
+                  <LinkText>Website Link</LinkText>
+                </Link>
+              </VStack>
               <Text
-                size="md"
-                bold
-                // color="$coolGray800"
-                // fontWeight="$bold"
-                // $dark-color="$warmGray100"
+                size="xs"
+                style={{
+                  alignSelf: "flex-start",
+                }}
+                $dark-color="$warmGray100"
               >
-                {item.fullName}
+                {item.formattedAddress}
               </Text>
-              <Text size="md">{item.recentText}</Text>
-            </VStack>
-            <Text
-              size="xs"
-              style={{
-                alignSelf: "flex-start",
-              }}
-              $dark-color="$warmGray100"
-            >
-              {item.timeStamp}
-            </Text>
-          </HStack>
-        </Box>
-      )}
-      keyExtractor={(item) => item.id}
-    />
-  </Box>;
+            </HStack>
+          </Box>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </Box>
+  );
 };

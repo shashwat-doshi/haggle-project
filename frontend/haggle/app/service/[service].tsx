@@ -1,3 +1,4 @@
+import { ServicesList } from "@/components/ServicesList";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { View, Text } from "react-native";
@@ -15,6 +16,8 @@ export default function ServicePage() {
     }
   }, [service, navigation]);
 
+  console.log("service", service);
+
   return (
     <View
       style={{
@@ -23,9 +26,7 @@ export default function ServicePage() {
         alignItems: "center",
       }}
     >
-      <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-        Service: {service}
-      </Text>
+      <ServicesList serviceType={service} />
     </View>
   );
 }
