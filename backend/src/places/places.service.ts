@@ -6,7 +6,8 @@ import {
 } from "./places.dto";
 import { ConfigService } from "@nestjs/config";
 
-export const searchRadius = 5000; // TODO: Do we want to have this customized?
+// TODO: Do we want to have this customized?
+export const searchRadius = 5000; // 5000 = 5km
 
 export const SERVICE_TYPE_MAP: Record<string, string[]> = {
   plumber: ["plumber"],
