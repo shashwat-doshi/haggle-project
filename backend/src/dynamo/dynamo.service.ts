@@ -6,6 +6,7 @@ import {
   PutCommand,
   GetCommand,
 } from "@aws-sdk/lib-dynamodb";
+import { IUser } from "./types";
 
 @Injectable()
 export class DynamoService {
@@ -40,7 +41,7 @@ export class DynamoService {
   }
 
   // ✅ Get a user by email from the authentication table
-  async getUser(email: string) {
+  async getUser(email: string): Promise<IUser | null> {
     const tableName = this.configService.get<string>(
       "AUTHENTICATION_TABLE_NAME",
     );
@@ -51,6 +52,12 @@ export class DynamoService {
     });
 
     const result = await this.docClient.send(command);
-    return result.Item; // Returns the user item or undefined if not found
+
+    if (!result.Item) {
+      console.error(`No user found with email: ${email}`);
+      return null;
+    }
+
+    return result.Item as IUser; // Returns the user item
   }
 }

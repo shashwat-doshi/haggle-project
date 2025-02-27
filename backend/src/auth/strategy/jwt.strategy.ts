@@ -3,6 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { DynamoService } from "src/dynamo/dynamo.service";
+import { IUser } from "src/dynamo/types";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   //default name is 'jwt' anyway
@@ -12,6 +13,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
       secretOrKey: configService.get("JWT_SECRET"), // simply tries to match the jwt key with your secret key
     });
   }
@@ -25,6 +27,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
       throw new UnauthorizedException("User not found");
     }
 
-    return user; // Attach the full user object to req.user
+    return user as IUser; // Attach the full user object to req.user
   }
 }
