@@ -3,13 +3,14 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
+    "preinstall": "rm -rf ./node_modules ./components/ui && npx gluestack-ui init && npx gluestack-ui add --all",
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "DARK_MODE=media expo start --android",
-    "ios": "DARK_MODE=media expo start --ios",
-    "web": "DARK_MODE=media expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "android": "DARK_MODE=media undefined",
+    "ios": "DARK_MODE=media undefined",
+    "web": "DARK_MODE=media undefined"
   },
   "jest": {
     "preset": "jest-expo"

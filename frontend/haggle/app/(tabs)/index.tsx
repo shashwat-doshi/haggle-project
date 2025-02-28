@@ -1,9 +1,9 @@
-import { Box } from "@/components/gluestack/box";
-import { Card } from "@/components/gluestack/card";
-import { Heading } from "@/components/gluestack/heading";
-import { HStack } from "@/components/gluestack/hstack";
-import { Pressable } from "@/components/gluestack/pressable";
-import { Text } from "@/components/gluestack/text";
+import { Box } from "@/components/ui/box";
+import { Card } from "@/components/ui/card";
+import { Heading } from "@/components/ui/heading";
+import { HStack } from "@/components/ui/hstack";
+import { Pressable } from "@/components/ui/pressable";
+import { Text } from "@/components/ui/text";
 import { ServicesList } from "@/components/ServicesList";
 import { useRouter } from "expo-router";
 

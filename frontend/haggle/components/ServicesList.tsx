@@ -1,11 +1,11 @@
 import { FlatList } from "react-native";
-import { Box } from "./gluestack/box";
-import { Heading } from "./gluestack/heading";
-import { HStack } from "./gluestack/hstack";
-import { VStack } from "./gluestack/vstack";
-import { Text } from "./gluestack/text";
+import { Box } from "./ui/box";
+import { Heading } from "./ui/heading";
+import { HStack } from "./ui/hstack";
+import { VStack } from "./ui/vstack";
+import { Text } from "./ui/text";
 import { useEffect, useState } from "react";
-import { Link, LinkText } from "./gluestack/link";
+import { Link, LinkText } from "./ui/link";
 
 export const ServicesList = ({ serviceType }: any) => {
   console.log("serviceType", serviceType);
