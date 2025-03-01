@@ -1,18 +1,36 @@
-module.exports = function(api) {
-    api.cache(true);
+module.exports = function (api) {
+  api.cache(true);
 
-    return {
-        presets: [["babel-preset-expo", {
-            jsxImportSource: "nativewind"
-        }], "nativewind/babel"],
+  return {
+    presets: [
+      [
+        "babel-preset-expo",
+        {
+          jsxImportSource: "nativewind",
+        },
+      ],
+      "nativewind/babel",
+    ],
 
-        plugins: [["module-resolver", {
-            root: ["./"],
+    plugins: [
+      [
+        "module-resolver",
+        {
+          root: ["./"],
 
-            alias: {
-                "@": "./",
-                "tailwind.config": "./tailwind.config.js"
-            }
-        }]]
-    };
+          alias: {
+            "@": "./",
+            "tailwind.config": "./tailwind.config.js",
+          },
+        },
+      ],
+      [
+        "module:react-native-dotenv",
+        {
+          moduleName: "@env",
+          path: ".env.local", // This ensures it's reading from .env.local
+        },
+      ],
+    ],
+  };
 };

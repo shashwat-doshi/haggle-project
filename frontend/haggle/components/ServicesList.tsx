@@ -6,7 +6,10 @@ import { VStack } from "./ui/vstack";
 import { Text } from "./ui/text";
 import { useEffect, useState, useCallback } from "react";
 import { Link, LinkText } from "./ui/link";
+import { Card } from "./ui/card";
 import * as Location from "expo-location";
+import mockServicesListData from "../mocks/mockServicesListData.json"; // Import mock data
+import { USE_MOCK_DATA } from "@env";
 
 export const ServicesList = ({ serviceType }: { serviceType: string }) => {
   const [data, setData] = useState<any[]>([]);
@@ -15,6 +18,7 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null,
   );
+  const shouldUseMockData = USE_MOCK_DATA === "true";
 
   console.log("location latitude", location?.coords.latitude);
   console.log("location longitude", location?.coords.longitude);
@@ -25,8 +29,7 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
   useEffect(() => {
     const getCurrentLocation = async () => {
       try {
-        const { status, canAskAgain } =
-          await Location.requestForegroundPermissionsAsync();
+        const { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== "granted") {
           setErrorMsg("Permission to access location was denied");
@@ -50,30 +53,34 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
     if (!location?.coords) return;
 
     setLoading(true);
+    let result;
+
     try {
-      const response = await fetch(
-        "http://localhost:3000/getPlacesByLocation",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+      if (!shouldUseMockData) {
+        const response = await fetch(
+          "http://localhost:3000/getPlacesByLocation",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              service: serviceType,
+            }),
           },
-          body: JSON.stringify({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            service: serviceType,
-          }),
-        },
-      );
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        result = await response.json();
+      } else {
+        console.log("Using mock data for services");
+        result = mockServicesListData;
       }
-
-      const result = await response.json();
-
-      // console.log("Fetched Data:", result);
       setData(result.data.places);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -95,29 +102,48 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
   if (error) return <Text>{error}</Text>;
 
   return (
-    <Box>
-      <Heading size="xl">Available Services</Heading>
+    <Box p="md" bg="coolGray100">
+      <Heading size="xl" mb="md" color="primary700">
+        Available Services
+      </Heading>
+
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
+        // numColumns={2} // Ensure a grid layout
+        // columnWrapperStyle={{ justifyContent: "space-between" }} // Spread items
         renderItem={({ item }) => (
-          <Box>
-            <HStack space="md" style={{ justifyContent: "space-between" }}>
-              <VStack>
-                <Text size="md" bold>
-                  {item.displayName.text}
-                </Text>
-                {item.websiteUri && (
-                  <Link href={item.websiteUri}>
-                    <LinkText>Website Link</LinkText>
-                  </Link>
-                )}
-              </VStack>
-              <Text size="xs" style={{ alignSelf: "flex-start" }}>
+          <Card
+            p="lg"
+            borderRadius="xl"
+            bg="yellow200" // Yellow background
+            shadow="3"
+            borderWidth={1}
+            borderColor="yellow400"
+            mb="md"
+            w="48%" // Each card takes almost half of the width
+          >
+            <VStack space="md">
+              {/* Title */}
+              <Text size="lg" bold color="coolGray800">
+                {item.displayName.text}
+              </Text>
+
+              {/* Website Link (if available) */}
+              {item.websiteUri && (
+                <Link href={item.websiteUri}>
+                  <LinkText color="primary600" underline>
+                    Visit Website
+                  </LinkText>
+                </Link>
+              )}
+
+              {/* Address */}
+              <Text size="sm" color="coolGray600">
                 {item.formattedAddress}
               </Text>
-            </HStack>
-          </Box>
+            </VStack>
+          </Card>
         )}
       />
     </Box>
