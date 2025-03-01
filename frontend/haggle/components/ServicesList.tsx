@@ -124,17 +124,19 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
             mb="md"
           >
             <VStack space="md">
-              <Text size="lg" bold color="coolGray800" style={styles.cardTitle}>
+              <Text size="lg" bold style={styles.cardTitle}>
                 {item.displayName.text}
               </Text>
 
               {item.websiteUri && (
                 <Link href={item.websiteUri}>
-                  <LinkText underline>Visit Website</LinkText>
+                  <LinkText color="primary600" underline>
+                    Visit Website
+                  </LinkText>
                 </Link>
               )}
 
-              <Text size="sm" color="coolGray600">
+              <Text size="sm" style={{ color: "white" }}>
                 {item.formattedAddress}
               </Text>
             </VStack>
@@ -164,7 +166,8 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    color: "black",
+    fontSize: 20,
+    fontWeight: "light",
   },
 });
