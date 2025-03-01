@@ -8,8 +8,9 @@ import { useEffect, useState, useCallback } from "react";
 import { Link, LinkText } from "./ui/link";
 import { Card } from "./ui/card";
 import * as Location from "expo-location";
-import mockServicesListData from "../mocks/mockServicesListData.json"; // Import mock data
+import mockServicesListData from "../mocks/mockServicesListData.json";
 import { USE_MOCK_DATA } from "@env";
+import { StyleSheet } from "react-native";
 
 export const ServicesList = ({ serviceType }: { serviceType: string }) => {
   const [data, setData] = useState<any[]>([]);
@@ -110,35 +111,29 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
-        // numColumns={2} // Ensure a grid layout
-        // columnWrapperStyle={{ justifyContent: "space-between" }} // Spread items
+        numColumns={2} // Use 2 columns for grid layout
+        columnWrapperStyle={styles.columnWrapper} // Add space between columns
         renderItem={({ item }) => (
           <Card
+            style={styles.card}
             p="lg"
             borderRadius="xl"
-            bg="yellow200" // Yellow background
             shadow="3"
             borderWidth={1}
-            borderColor="yellow400"
+            borderColor="yellow"
             mb="md"
-            w="48%" // Each card takes almost half of the width
           >
             <VStack space="md">
-              {/* Title */}
-              <Text size="lg" bold color="coolGray800">
+              <Text size="lg" bold color="coolGray800" style={styles.cardTitle}>
                 {item.displayName.text}
               </Text>
 
-              {/* Website Link (if available) */}
               {item.websiteUri && (
                 <Link href={item.websiteUri}>
-                  <LinkText color="primary600" underline>
-                    Visit Website
-                  </LinkText>
+                  <LinkText underline>Visit Website</LinkText>
                 </Link>
               )}
 
-              {/* Address */}
               <Text size="sm" color="coolGray600">
                 {item.formattedAddress}
               </Text>
@@ -149,3 +144,27 @@ export const ServicesList = ({ serviceType }: { serviceType: string }) => {
     </Box>
   );
 };
+
+const styles = StyleSheet.create({
+  columnWrapper: {
+    justifyContent: "space-between", // Spread items evenly across the row
+    marginBottom: 10, // Add space between rows
+  },
+  card: {
+    backgroundColor: "orange",
+    width: "48%", // Width of each card
+    marginBottom: 15,
+    borderRadius: 15,
+    padding: 15,
+    borderColor: "yellow", // Border color
+    borderWidth: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});
