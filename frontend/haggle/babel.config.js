@@ -29,6 +29,7 @@ module.exports = function (api) {
         {
           moduleName: "@env",
           path: ".env.local", // This ensures it's reading from .env.local
+          allowUndefined: true,
         },
       ],
     ],
