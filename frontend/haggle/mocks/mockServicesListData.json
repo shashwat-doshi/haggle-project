@@ -1,0 +1,36 @@
+{
+  "data": {
+    "places": [
+      {
+        "id": "1",
+        "displayName": { "text": "Tim Hortons" },
+        "websiteUri": "https://www.timhortons.ca",
+        "formattedAddress": "123 Main St, Toronto, ON"
+      },
+      {
+        "id": "2",
+        "displayName": { "text": "Starbucks" },
+        "websiteUri": "https://www.starbucks.ca",
+        "formattedAddress": "456 Queen St, Toronto, ON"
+      },
+      {
+        "id": "3",
+        "displayName": { "text": "McDonald's" },
+        "websiteUri": "https://www.mcdonalds.ca",
+        "formattedAddress": "789 King St, Toronto, ON"
+      },
+      {
+        "id": "4",
+        "displayName": { "text": "Subway" },
+        "websiteUri": "https://www.subway.ca",
+        "formattedAddress": "101 College St, Toronto, ON"
+      },
+      {
+        "id": "5",
+        "displayName": { "text": "Burger King" },
+        "websiteUri": "https://www.burgerking.ca",
+        "formattedAddress": "202 Dundas St, Toronto, ON"
+      }
+    ]
+  }
+}
