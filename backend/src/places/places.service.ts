@@ -10,20 +10,19 @@ import { ConfigService } from "@nestjs/config";
 export const searchRadius = 5000; // 5000 = 5km
 
 export const SERVICE_TYPE_MAP: Record<string, string[]> = {
-  plumber: ["plumber"],
+  plumbing: ["plumber"],
   electrician: ["electrician"],
-  moving: ["moving_company"],
-  cleaning: ["laundry"],
+  "moving services": ["moving_company"],
+  "laundry services": ["laundry"],
   mechanic: ["car_repair"],
-  doctor: ["doctor", "hospital"],
-  salon: [
+  salons: [
     "beauty_salon",
     "hair_care",
     "hair_salon",
     "nail_salon",
     "barber_shop",
   ],
-  lawyer: ["lawyer"],
+  "lawyer services": ["lawyer"],
 };
 
 @Injectable()
