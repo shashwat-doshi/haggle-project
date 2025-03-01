@@ -7,6 +7,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 1. Install dependencies
 
    ```bash
+   rm -rf ./node_modules ./components/ui babel.config.js && npx gluestack-ui init && npx gluestack-ui add --all
    npm install
    ```
 
